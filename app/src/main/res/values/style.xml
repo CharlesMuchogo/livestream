@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="android:itemBackground">@color/black</item>
+        <item name="itemIconTint">@color/whiteGrey</item>
+        <item name="itemTextColor">@color/whiteGrey</item>
+    </style>
+
+    <style name="BottomNavigationView.Selected" parent="BottomNavigationView">
+        <item name="itemTextColor">@color/white</item>
+        <item name="itemIconTint">@color/white</item>
+        <item name="android:itemBackground">@color/black</item>
+    </style>
+</resources>

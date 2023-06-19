@@ -4,21 +4,24 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.charlesmuchogo.livestream.favourites.FavouritesFragment
+import com.charlesmuchogo.livestream.home.HomeFragment
+import com.charlesmuchogo.livestream.live.LiveFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
-  private lateinit var bottomNavigation: BottomNavigationView
+    private lateinit var bottomNavigation: BottomNavigationView
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-         bottomNavigation = findViewById(R.id.bottomNav)
+        bottomNavigation = findViewById(R.id.bottomNav)
 
         loadFragment(HomeFragment())
 
-         bottomNavigation.setOnItemSelectedListener { item ->
+        bottomNavigation.setOnItemSelectedListener { item ->
             val fragment = when (item.itemId) {
                 R.id.bbn_home -> HomeFragment()
                 R.id.bbn_live -> LiveFragment()
