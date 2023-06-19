@@ -48,7 +48,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="15sp"
-                        android:text="Event Name" />
+                        />
                     <TextView
                         android:id="@+id/eventDate"
                         android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
                         android:textColor="@color/white"
                         android:textSize="13sp"
                         android:textStyle="italic"
-                        android:text="Event Date" />
+                         />
 
                 </LinearLayout>
 

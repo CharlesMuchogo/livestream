@@ -1,16 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/denseGrey"
-    tools:context=".presentation.favourites.FavouritesFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <variable
+            name="handler"
+            type="com.charlesmuchogo.livestream.presentation.favourites.FavouritesFragment" />
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="@color/white"
-        android:text="Favourites" />
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/liveEvents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/status_bar_spacing"
+            android:textSize="20sp"
+            android:text="@string/favourites" />
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/liveEvents"
+            android:layout_marginStart="@dimen/section_spacing"
+            android:layout_marginTop="@dimen/section_spacing"
+            android:layout_marginEnd="@dimen/section_spacing"
+            android:layout_marginBottom="@dimen/section_spacing"
+            android:background="@drawable/background_radius"
+            android:backgroundTint="@color/lightGrey"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@null"
+            app:queryHint="Search" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_below="@id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </RelativeLayout>
+
+</layout>
