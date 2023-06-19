@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.charlesmuchogo.livestream.favourites.FavouritesFragment
-import com.charlesmuchogo.livestream.home.HomeFragment
-import com.charlesmuchogo.livestream.live.LiveFragment
+import com.charlesmuchogo.livestream.presentation.favourites.FavouritesFragment
+import com.charlesmuchogo.livestream.presentation.home.HomeFragment
+import com.charlesmuchogo.livestream.presentation.live.LiveFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 

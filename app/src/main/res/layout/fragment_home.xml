@@ -7,58 +7,52 @@
     <data>
         <variable
             name="handler"
-            type="com.charlesmuchogo.livestream.home.HomeFragment" />
+            type="com.charlesmuchogo.livestream.presentation.home.HomeFragment" />
     </data>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/liveChannels"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/status_bar_spacing"
+            android:textSize="20sp"
+            android:text="@string/live_channels" />
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/liveChannels"
+            android:layout_marginStart="@dimen/section_spacing"
+            android:layout_marginTop="@dimen/section_spacing"
+            android:layout_marginEnd="@dimen/section_spacing"
+            android:layout_marginBottom="@dimen/section_spacing"
+            android:background="@drawable/background_radius"
+            android:backgroundTint="@color/lightGrey"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@null"
+            app:queryHint="Search" />
+
+        <GridView
+            android:id="@+id/gridView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_below="@id/search_view"
+            android:numColumns="2"
+            android:verticalSpacing="10dp"
+            android:horizontalSpacing="10dp"
+            android:padding="10dp"
+            android:stretchMode="columnWidth"
+            android:gravity="center" />
 
-
-<!--                <TextView-->
-<!--                    android:id="@+id/liveChannels"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    android:gravity="center_horizontal"-->
-<!--                    android:layout_marginTop="29dp"-->
-<!--                    android:textSize="20sp"-->
-<!--                    android:text="@string/live_channels" />-->
-
-<!--                <androidx.appcompat.widget.SearchView-->
-<!--                    android:id="@+id/search_view"-->
-<!--                    android:layout_below="@+id/liveChannels"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="@dimen/section_spacing"-->
-<!--                    android:layout_marginTop="@dimen/section_spacing"-->
-<!--                    android:layout_marginEnd="@dimen/section_spacing"-->
-<!--                    android:layout_marginBottom="@dimen/section_spacing"-->
-<!--                    android:background="@drawable/background_radius"-->
-<!--                    android:backgroundTint="@color/lightGrey"-->
-<!--                    app:iconifiedByDefault="false"-->
-<!--                    app:queryBackground="@null"-->
-<!--                    app:queryHint="Search" />-->
-
-
-
-            <GridView
-                android:id="@+id/gridView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:numColumns="2"
-                android:verticalSpacing="10dp"
-                android:horizontalSpacing="10dp"
-                android:padding="10dp"
-                android:stretchMode="columnWidth"
-                android:gravity="center"
-                />
-
-
-        </RelativeLayout>
-
+    </RelativeLayout>
 
 </layout>

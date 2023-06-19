@@ -6,4 +6,6 @@
     <string name="live">Live</string>
     <string name="live_channels">Live Channels</string>
     <string name="no_channels_available_at_the_moment">No channels available at the moment</string>
+    <string name="live_events">Live Events</string>
+    <string name="sport">Sport</string>
 </resources>

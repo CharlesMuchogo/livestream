@@ -1,4 +1,4 @@
-package com.charlesmuchogo.livestream.home
+package com.charlesmuchogo.livestream.data.dataclasses
 
 data class Channels(
     var image: String,

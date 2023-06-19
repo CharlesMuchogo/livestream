@@ -1,4 +1,4 @@
-package com.charlesmuchogo.livestream.favourites
+package com.charlesmuchogo.livestream.presentation.favourites
 
 import android.os.Bundle
 import android.view.LayoutInflater

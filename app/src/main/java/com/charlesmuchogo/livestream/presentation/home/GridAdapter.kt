@@ -1,4 +1,4 @@
-package com.charlesmuchogo.livestream.home
+package com.charlesmuchogo.livestream.presentation.home
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import coil.load
 import com.charlesmuchogo.livestream.R
+import com.charlesmuchogo.livestream.data.dataclasses.Channels
 
 class GridAdapter(private val context: Context, private val imageList: List<Channels>) : BaseAdapter() {
 
