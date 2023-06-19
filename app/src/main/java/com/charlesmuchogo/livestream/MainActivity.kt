@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import com.charlesmuchogo.livestream.presentation.favourites.FavouritesFragment
 import com.charlesmuchogo.livestream.presentation.home.HomeFragment
 import com.charlesmuchogo.livestream.presentation.live.LiveFragment
+import com.charlesmuchogo.livestream.presentation.player.PlayerFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.bbn_home -> HomeFragment()
                 R.id.bbn_live -> LiveFragment()
                 R.id.bbn_favorite -> FavouritesFragment()
+               // R.id.bbn_favorite -> PlayerFragment()
                 else -> HomeFragment()
             }
 

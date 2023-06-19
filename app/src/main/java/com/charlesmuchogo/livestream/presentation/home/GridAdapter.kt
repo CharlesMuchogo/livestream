@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import coil.load
 import com.charlesmuchogo.livestream.R
 import com.charlesmuchogo.livestream.data.dataclasses.Channels
+import com.charlesmuchogo.livestream.presentation.player.PlayerFragment
 
 class GridAdapter(private val context: Context, private val imageList: List<Channels>) : BaseAdapter() {
 
@@ -39,6 +42,8 @@ class GridAdapter(private val context: Context, private val imageList: List<Chan
         val channelName = view.findViewById<TextView>(R.id.channelName)
         imageView.load(imageList[position].image)
         channelName.text = imageList[position].title
+
+
 
         return view
     }
