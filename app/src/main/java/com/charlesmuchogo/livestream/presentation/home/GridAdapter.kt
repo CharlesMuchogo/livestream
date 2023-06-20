@@ -1,5 +1,6 @@
 package com.charlesmuchogo.livestream.presentation.home
 
+import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +9,10 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import coil.load
+import com.charlesmuchogo.livestream.MainActivity
 import com.charlesmuchogo.livestream.R
 import com.charlesmuchogo.livestream.data.dataclasses.Channels
-import com.charlesmuchogo.livestream.presentation.player.PlayerFragment
 
 class GridAdapter(private val context: Context, private val imageList: List<Channels>) : BaseAdapter() {
 
@@ -43,6 +43,10 @@ class GridAdapter(private val context: Context, private val imageList: List<Chan
         imageView.load(imageList[position].image)
         channelName.text = imageList[position].title
 
+        view.setOnClickListener {
+            val navController = Navigation.findNavController(view)
+            navController.navigate(R.id.action_homeFragment_to_playerFragment)
+        }
 
 
         return view

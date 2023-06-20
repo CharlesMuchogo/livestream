@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.GridView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import com.charlesmuchogo.livestream.R
 import com.charlesmuchogo.livestream.data.dataclasses.Channels
 import com.charlesmuchogo.livestream.databinding.FragmentHomeBinding
@@ -28,7 +29,6 @@ class HomeFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.handler = this
-//        val searchView = binding.searchView
 
         gridView = binding.gridView
         val channelList = listOf(
@@ -45,6 +45,8 @@ class HomeFragment : Fragment() {
 
         val adapter = GridAdapter(requireContext(), channelList)
         gridView.adapter = adapter
+
+
 
         return binding.root
     }
