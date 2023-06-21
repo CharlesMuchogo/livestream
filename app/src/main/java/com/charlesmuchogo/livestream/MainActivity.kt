@@ -9,7 +9,6 @@ import androidx.navigation.fragment.NavHostFragment
 import com.charlesmuchogo.livestream.presentation.favourites.FavouritesFragment
 import com.charlesmuchogo.livestream.presentation.home.HomeFragment
 import com.charlesmuchogo.livestream.presentation.live.LiveFragment
-import com.charlesmuchogo.livestream.presentation.player.PlayerFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -27,8 +26,8 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
-        navController.navigate(R.id.action_homeFragment_to_playerFragment)
-       // loadFragment(HomeFragment())
+       // navController.navigate(R.id.action_homeFragment_to_playerFragment)
+       loadFragment(HomeFragment())
 
 
         bottomNavigation.setOnItemSelectedListener { item ->
