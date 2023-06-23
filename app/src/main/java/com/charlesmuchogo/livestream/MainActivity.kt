@@ -26,8 +26,8 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
-       // navController.navigate(R.id.action_homeFragment_to_playerFragment)
-       loadFragment(HomeFragment())
+       navController.navigate(R.id.action_homeFragment_to_playerFragment)
+       //loadFragment(HomeFragment())
 
 
         bottomNavigation.setOnItemSelectedListener { item ->

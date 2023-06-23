@@ -8,18 +8,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.charlesmuchogo.livestream.R
 import com.charlesmuchogo.livestream.databinding.FragmentPlayerBinding
-import com.google.android.exoplayer2.DefaultLivePlaybackSpeedControl
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.upstream.DefaultDataSource
-
+import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.source.hls.HlsMediaSource
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
+import com.google.android.exoplayer2.util.Util
 
 class PlayerFragment : Fragment() {
-    lateinit var binding: FragmentPlayerBinding
+    private lateinit var binding: FragmentPlayerBinding
+    private lateinit var player: SimpleExoPlayer
 
-    var videoUrl =  "https://vikistream.com/embed2.php?player=desktop&live=bein1fr"
-
+    private val videoUrl = "https://4c62a87c1810.us-west-2.playback.live-video.net/api/video/v1/us-west-2.049054135175.channel.onToXRHIurEP.m3u8"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,44 +28,34 @@ class PlayerFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_player, container, false)
         binding.handler = this
 
-        initializePlayer()
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initializePlayer()
+    }
+
     private fun initializePlayer() {
-        val player =
-            ExoPlayer.Builder(requireContext())
-                .setLivePlaybackSpeedControl(
-                    DefaultLivePlaybackSpeedControl.Builder().setFallbackMaxPlaybackSpeed(1.04f).build()
-                )
-                .build()
+        player = SimpleExoPlayer.Builder(requireContext()).build()
 
-        // create a media item.
-        val mediaItem =
-            MediaItem.Builder()
-                .setUri("https://storage.googleapis.com/exoplayer-test-media-0/BigBuckBunny_320x180.mp4")
-                .setLiveConfiguration(
-                    MediaItem.LiveConfiguration.Builder().setMaxPlaybackSpeed(1.02f).build()
-                )
-                .build()
-
-        player.setMediaItem(mediaItem)
-
-
-        val mediaSource = ProgressiveMediaSource.Factory(
-            DefaultDataSource.Factory(requireContext()) // <- context
+        val dataSourceFactory = DefaultDataSourceFactory(
+            requireContext(),
+            Util.getUserAgent(requireContext(), "YourApplicationName")
         )
-            .createMediaSource(mediaItem)
 
-        // Finally assign this media source to the player
-        player.apply {
-            setMediaSource(mediaSource)
-            playWhenReady = true // start playing when the exoplayer has setup
-            seekTo(0, 0L) // Start from the beginning
-            prepare() // Change the state from idle.
-        }.also {
-            // Do not forget to attach the player to the view
-            binding.playerView.player = it
-        }
+        val mediaSource = HlsMediaSource.Factory(dataSourceFactory)
+            .createMediaSource(MediaItem.fromUri(videoUrl))
+
+        player.setMediaSource(mediaSource)
+        player.prepare()
+        player.playWhenReady = true
+
+        binding.playerView.player = player
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        player.release()
     }
 }
