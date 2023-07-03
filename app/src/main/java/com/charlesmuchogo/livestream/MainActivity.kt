@@ -10,8 +10,9 @@ import com.charlesmuchogo.livestream.presentation.favourites.FavouritesFragment
 import com.charlesmuchogo.livestream.presentation.home.HomeFragment
 import com.charlesmuchogo.livestream.presentation.live.LiveFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigation: BottomNavigationView
     lateinit var navController: NavController

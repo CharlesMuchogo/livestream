@@ -9,8 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.charlesmuchogo.livestream.R
-import com.charlesmuchogo.livestream.data.dataclasses.Channels
-import com.charlesmuchogo.livestream.data.dataclasses.LiveEvent
+import com.charlesmuchogo.livestream.data.local.dataclasses.Channels
+import com.charlesmuchogo.livestream.data.local.dataclasses.LiveEvent
 import com.charlesmuchogo.livestream.databinding.FragmentHomeBinding
 import com.charlesmuchogo.livestream.databinding.FragmentLiveBinding
 

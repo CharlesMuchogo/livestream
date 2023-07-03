@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.charlesmuchogo.livestream.R
-import com.charlesmuchogo.livestream.data.dataclasses.Channels
-import com.charlesmuchogo.livestream.data.dataclasses.LiveEvent
+import com.charlesmuchogo.livestream.data.local.dataclasses.Channels
+import com.charlesmuchogo.livestream.data.local.dataclasses.LiveEvent
 
 
 class LiveEventsRecyclerViewAdapter(private val dataList: List<LiveEvent>) :

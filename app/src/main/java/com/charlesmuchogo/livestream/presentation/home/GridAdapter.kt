@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import coil.load
 import com.charlesmuchogo.livestream.R
-import com.charlesmuchogo.livestream.data.dataclasses.Channels
+import com.charlesmuchogo.livestream.data.local.dataclasses.Channels
 
 class GridAdapter(private val context: Context, private val imageList: List<Channels>) : BaseAdapter() {
 
