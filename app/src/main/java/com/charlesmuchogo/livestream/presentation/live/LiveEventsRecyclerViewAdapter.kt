@@ -5,11 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.charlesmuchogo.livestream.R
 import com.charlesmuchogo.livestream.data.local.dataclasses.Channels
 import com.charlesmuchogo.livestream.data.local.dataclasses.LiveEvent
+import com.charlesmuchogo.livestream.presentation.favourites.FavouritesFragmentDirections
 
 
 class LiveEventsRecyclerViewAdapter(private val dataList: List<LiveEvent>) :
@@ -31,6 +33,12 @@ class LiveEventsRecyclerViewAdapter(private val dataList: List<LiveEvent>) :
        holder.eventName.text = dataList[position].eventName
        holder.eventDate.text = dataList[position].eventDate
        holder.imageView.load(dataList[position].image)
+
+        holder.itemView.setOnClickListener {
+            val action = LiveFragmentDirections.actionLiveFragmentToPlayerFragment()
+            val navController = it.findNavController()
+            navController.navigate(action)
+        }
     }
 
     override fun getItemCount(): Int {

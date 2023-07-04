@@ -3,7 +3,7 @@ package com.charlesmuchogo.livestream
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.charlesmuchogo.livestream.presentation.favourites.FavouritesFragment
@@ -27,27 +27,26 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
-       navController.navigate(R.id.action_homeFragment_to_playerFragment)
-       //loadFragment(HomeFragment())
 
 
-        bottomNavigation.setOnItemSelectedListener { item ->
-            val fragment = when (item.itemId) {
-                R.id.bbn_home -> HomeFragment()
-                R.id.bbn_live -> LiveFragment()
-                R.id.bbn_favorite -> FavouritesFragment()
-               // R.id.bbn_favorite -> PlayerFragment()
-                else -> HomeFragment()
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.playerFragment) {
+                bottomNavigation.visibility = View.GONE
+            } else {
+                bottomNavigation.visibility = View.VISIBLE
             }
-
-            loadFragment(fragment)
-            true
         }
 
-    }
-    private  fun loadFragment(fragment: Fragment){
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container,fragment)
-        transaction.commit()
+        bottomNavigation.setOnItemSelectedListener { item ->
+            val destination = when (item.itemId) {
+                R.id.bbn_home -> R.id.homeFragment
+                R.id.bbn_live -> R.id.liveFragment
+                R.id.bbn_favorite -> R.id.favouritesFragment
+                else -> R.id.homeFragment
+            }
+
+            navController.navigate(destination)
+            true
+        }
     }
 }

@@ -40,7 +40,7 @@ class FavouritesViewModel @Inject constructor(
 
     init {
         getEvents()
-        insertData()
+       // insertData()
     }
 
 

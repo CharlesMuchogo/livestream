@@ -18,8 +18,33 @@
     <fragment
         android:id="@+id/playerFragment"
         android:name="com.charlesmuchogo.livestream.presentation.player.PlayerFragment"
-        android:label="PlayerFragment" />
-
+        android:label="PlayerFragment" >
+        <action
+            android:id="@+id/action_playerFragment_to_favouritesFragment"
+            app:destination="@id/favouritesFragment" />
+        <action
+            android:id="@+id/action_playerFragment_to_liveFragment"
+            app:destination="@id/liveFragment" />
+        <action
+            android:id="@+id/action_playerFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favouritesFragment"
+        android:name="com.charlesmuchogo.livestream.presentation.favourites.FavouritesFragment"
+        android:label="FavouritesFragment" >
+        <action
+            android:id="@+id/action_favouritesFragment_to_playerFragment"
+            app:destination="@id/playerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/liveFragment"
+        android:name="com.charlesmuchogo.livestream.presentation.live.LiveFragment"
+        android:label="LiveFragment" >
+        <action
+            android:id="@+id/action_liveFragment_to_playerFragment"
+            app:destination="@id/playerFragment" />
+    </fragment>
 
 
 </navigation>

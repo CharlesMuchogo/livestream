@@ -5,10 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.charlesmuchogo.livestream.R
-import com.charlesmuchogo.livestream.data.local.dataclasses.Channels
 import com.charlesmuchogo.livestream.data.local.dataclasses.LiveEvent
 
 
@@ -29,6 +29,11 @@ class FavouritesRecyclerViewAdapter(private val dataList: List<LiveEvent>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
        holder.eventName.text = dataList[position].eventName
        holder.imageView.load(dataList[position].image)
+        holder.itemView.setOnClickListener {
+            val action = FavouritesFragmentDirections.actionFavouritesFragmentToPlayerFragment()
+            val navController = it.findNavController()
+            navController.navigate(action)
+        }
     }
 
     override fun getItemCount(): Int {
