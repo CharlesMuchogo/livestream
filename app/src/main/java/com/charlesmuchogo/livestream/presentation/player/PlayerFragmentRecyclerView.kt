@@ -5,15 +5,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.charlesmuchogo.livestream.R
-import com.charlesmuchogo.livestream.data.local.dataclasses.LiveEvent
-import com.charlesmuchogo.livestream.presentation.live.LiveFragmentDirections
+import com.charlesmuchogo.livestream.data.local.databaseclasses.Events
+import com.charlesmuchogo.livestream.presentation.favourites.FavouritesViewModel
 
-class PlayerFragmentRecyclerView(private val dataList: List<LiveEvent>) :
+class PlayerFragmentRecyclerView(private val dataList: MutableList<Events>, private  val favouritesViewModel: FavouritesViewModel) :
     RecyclerView.Adapter<PlayerFragmentRecyclerView.ViewHolder>() {
+    fun updateData(newData: List<Events>) {
+        dataList.clear()
+        dataList.addAll(newData)
+        notifyDataSetChanged()
+    }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val eventName: TextView = itemView.findViewById(R.id.eventName)
@@ -31,6 +35,9 @@ class PlayerFragmentRecyclerView(private val dataList: List<LiveEvent>) :
         holder.eventName.text = dataList[position].eventName
         holder.eventDate.text = dataList[position].eventDate
         holder.imageView.load(dataList[position].image)
+        holder.imageView.setOnClickListener {
+            favouritesViewModel.favouriteEvent(dataList[position])
+        }
     }
 
     override fun getItemCount(): Int {

@@ -2,6 +2,7 @@ package com.charlesmuchogo.livestream.presentation.favourites
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.charlesmuchogo.livestream.data.local.database.AppDatabase
@@ -19,18 +20,8 @@ class FavouritesViewModel @Inject constructor(
     private  val repository = EventRepository(appDatabase.eventsDao())
 
 
-    val eventsList = MutableStateFlow(
-       listOf(LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "Supersports"),
-           LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "BT Sport 8"),
-           LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "BeIN Sport 8"),
-           LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "ESPN USA"),
-           LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "EuroSport 1 UK"),
-           LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "EuroSport 1 UK"),
-           LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "EuroSport 1 UK"),
-           LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "EuroSport 1 UK"),
-           LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "EuroSport 1 UK"),
-       )
-    )
+    val eventsList: MutableLiveData<List<Events>> = MutableLiveData()
+
 
     val eventList: List<Events> =
        listOf(
@@ -40,17 +31,38 @@ class FavouritesViewModel @Inject constructor(
 
     init {
         getEvents()
-       // insertData()
     }
 
 
 
-    private fun getEvents(){
+    private fun getEvents() {
         viewModelScope.launch {
-            repository.getAllEvents().runCatching {
+            try {
+                repository.getAllEvents().collect { events ->
+                    Log.e("FavouritesViewModel", "get events: $events")
+                    eventsList.value = events
+                }
+            } catch (e: Exception) {
+                Log.e("FavouritesViewModel", "Failed to get events: ${e.message}")
             }
         }
     }
+
+
+    fun favouriteEvent(event: Events) {
+        viewModelScope.launch {
+            try {
+                repository.favouriteEvent(event.id, false)
+            } catch (e: Exception) {
+                Log.e("FavouritesViewModel", "Failed to favourite this event ${e.message}")
+            }
+        }
+    }
+
+
+
+
+
 
     private fun insertData(){
         viewModelScope.launch {
@@ -59,8 +71,5 @@ class FavouritesViewModel @Inject constructor(
             }
         }
     }
-
-
-
 
 }

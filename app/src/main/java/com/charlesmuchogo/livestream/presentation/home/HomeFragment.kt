@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.GridView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
 import com.charlesmuchogo.livestream.R
 import com.charlesmuchogo.livestream.data.local.dataclasses.Channels
 import com.charlesmuchogo.livestream.databinding.FragmentHomeBinding

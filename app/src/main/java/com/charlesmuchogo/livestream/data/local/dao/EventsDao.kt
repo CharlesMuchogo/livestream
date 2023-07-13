@@ -1,16 +1,21 @@
 package com.charlesmuchogo.livestream.data.local.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
 import com.charlesmuchogo.livestream.data.local.databaseclasses.Events
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface EventsDao {
     @Query("SELECT * FROM events")
-    suspend fun getAll(): List<Events>
+    fun getAll(): Flow<List<Events>>
+    @Query("SELECT * FROM events WHERE favourite = true")
+    suspend fun getFavourites(): List<Events>
 
     @Upsert
     suspend fun upsertAll(products: List<Events>)
+
+    @Query("UPDATE events SET favourite =:favourite WHERE id =:id  ")
+    suspend fun favouriteEvent(id: Int, favourite: Boolean)
 }

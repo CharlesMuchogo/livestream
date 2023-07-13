@@ -40,11 +40,15 @@ class PlayerFragment : Fragment() {
         binding.handler = this
 
         recyclerView = binding.recyclerView
-        adapter = PlayerFragmentRecyclerView(viewModel.eventsList.value)
+        adapter = PlayerFragmentRecyclerView(ArrayList(viewModel.eventsList.value ?: emptyList()), viewModel)
         recyclerView.adapter = adapter
+        viewModel.eventsList.observe(viewLifecycleOwner) { events ->
+            adapter.updateData(events)
+        }
 
         return binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -1,6 +1,7 @@
 package com.charlesmuchogo.livestream.data.local.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
 import com.charlesmuchogo.livestream.data.local.databaseclasses.Channels
@@ -14,4 +15,5 @@ interface ChannelsDao {
 
     @Upsert
     suspend fun upsertAll(products: List<Channels>)
+
 }
