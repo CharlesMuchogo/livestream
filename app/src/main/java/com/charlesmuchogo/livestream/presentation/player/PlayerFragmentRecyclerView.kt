@@ -23,6 +23,8 @@ class PlayerFragmentRecyclerView(private val dataList: MutableList<Events>, priv
         val eventName: TextView = itemView.findViewById(R.id.eventName)
         val eventDate: TextView = itemView.findViewById(R.id.eventDate)
         val imageView: ImageView = itemView.findViewById(R.id.imageView)
+        val vectorImage: ImageView = itemView.findViewById(R.id.vectorImage)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,7 +37,12 @@ class PlayerFragmentRecyclerView(private val dataList: MutableList<Events>, priv
         holder.eventName.text = dataList[position].eventName
         holder.eventDate.text = dataList[position].eventDate
         holder.imageView.load(dataList[position].image)
-        holder.imageView.setOnClickListener {
+        if(dataList[position].favourite){
+            holder.vectorImage.setImageResource(R.drawable.baseline_heart_24)
+        }else{
+            holder.vectorImage.setImageResource(R.drawable.ic_outlined_heart_black_24dp)
+        }
+        holder.vectorImage.setOnClickListener {
             favouritesViewModel.favouriteEvent(dataList[position])
         }
     }

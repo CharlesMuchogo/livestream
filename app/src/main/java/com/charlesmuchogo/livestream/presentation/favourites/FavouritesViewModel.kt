@@ -23,14 +23,10 @@ class FavouritesViewModel @Inject constructor(
     val eventsList: MutableLiveData<List<Events>> = MutableLiveData()
 
 
-    val eventList: List<Events> =
-       listOf(
-           Events(id = 0, image ="https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventName ="Supersports", eventDate = "Today 14:30", favourite = false  )
-
-    )
 
     init {
-        getEvents()
+        getFavourites()
+        //getEvents()
     }
 
 
@@ -39,7 +35,18 @@ class FavouritesViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 repository.getAllEvents().collect { events ->
-                    Log.e("FavouritesViewModel", "get events: $events")
+                    eventsList.value = events
+                }
+            } catch (e: Exception) {
+                Log.e("FavouritesViewModel", "Failed to get events: ${e.message}")
+            }
+        }
+    }
+
+    private fun getFavourites() {
+        viewModelScope.launch {
+            try {
+                repository.getFavourites().collect { events ->
                     eventsList.value = events
                 }
             } catch (e: Exception) {
@@ -52,7 +59,7 @@ class FavouritesViewModel @Inject constructor(
     fun favouriteEvent(event: Events) {
         viewModelScope.launch {
             try {
-                repository.favouriteEvent(event.id, false)
+                repository.favouriteEvent(event.id, !event.favourite)
             } catch (e: Exception) {
                 Log.e("FavouritesViewModel", "Failed to favourite this event ${e.message}")
             }
@@ -64,12 +71,12 @@ class FavouritesViewModel @Inject constructor(
 
 
 
-    private fun insertData(){
-        viewModelScope.launch {
-            repository.getAllEvents().runCatching {
-                repository.insertEvent(eventList)
-            }
-        }
-    }
+//    private fun insertData(){
+//        viewModelScope.launch {
+//            repository.getAllEvents().runCatching {
+//                repository.insertEvent(eventList)
+//            }
+//        }
+//    }
 
 }

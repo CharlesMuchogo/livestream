@@ -26,6 +26,7 @@ class FavouritesRecyclerViewAdapter(private val dataList:  MutableList<Events>, 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val eventName: TextView = itemView.findViewById(R.id.eventName)
         val imageView: ImageView = itemView.findViewById(R.id.imageView)
+        val vectorImage: ImageView = itemView.findViewById(R.id.vectorImage)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -38,7 +39,12 @@ class FavouritesRecyclerViewAdapter(private val dataList:  MutableList<Events>, 
 
         holder.eventName.text = dataList[position].eventName
        holder.imageView.load(dataList[position].image)
-        holder.imageView.setOnClickListener {
+        if(dataList[position].favourite){
+            holder.vectorImage.setImageResource(R.drawable.baseline_heart_24)
+        }else{
+            holder.vectorImage.setImageResource(R.drawable.ic_outlined_heart_black_24dp)
+        }
+        holder.vectorImage.setOnClickListener {
             favouritesViewModel.favouriteEvent(dataList[position])
         }
         holder.itemView.setOnClickListener {
