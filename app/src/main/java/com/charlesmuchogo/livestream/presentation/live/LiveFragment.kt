@@ -35,16 +35,15 @@ class LiveFragment : Fragment() {
         binding.handler = this
         recyclerView = binding.recyclerView
 
+        val link  = "https://fcc3ddae59ed.us-west-2.playback.live-video.net/api/video/v1/us-west-2.893648527354.channel.DmumNckWFTqz.m3u8"
+
         val eventsList = listOf(
-            LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "Supersports"),
-            LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "BT Sport 8"),
-            LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "BeIN Sport 8"),
-            LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "ESPN USA"),
-            LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "EuroSport 1 UK"),
-            LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "EuroSport 1 UK"),
-            LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "EuroSport 1 UK"),
-            LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "EuroSport 1 UK"),
-            LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "EuroSport 1 UK"),
+            LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "Supersports", link =link ),
+            LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "BT Sport 8", link =link ),
+            LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "BeIN Sport 8", link =link ),
+            LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "ESPN USA", link =link ),
+            LiveEvent(image = "https://firebasestorage.googleapis.com/v0/b/flutter-notifications-a462c.appspot.com/o/images%2Fss_logo_slogan.png?alt=media&token=f21675b0-8296-4b50-8fa4-8ce18c95ecba", eventDate = "Today 14:30", eventName = "EuroSport 1 UK", link =link ),
+
         )
         adapter = LiveEventsRecyclerViewAdapter(eventsList, viewModel)
         recyclerView.adapter = adapter

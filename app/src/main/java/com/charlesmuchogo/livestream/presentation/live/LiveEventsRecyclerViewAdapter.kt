@@ -39,7 +39,7 @@ class LiveEventsRecyclerViewAdapter(private val dataList: List<LiveEvent>,privat
        holder.imageView.load(dataList[position].image)
 
        holder.vectorImage.setOnClickListener {
-           viewModel.favouriteEvent(Events(0,dataList[position].image, dataList[position].eventName, dataList[position].eventDate,true))
+           viewModel.favouriteEvent(Events(0,dataList[position].image, dataList[position].eventName, dataList[position].eventDate, dataList[position].link, true))
            Toast.makeText(holder.itemView.context, "Event added to favourites ", LENGTH_SHORT).show()
        }
 

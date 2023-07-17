@@ -4,4 +4,5 @@ data class LiveEvent(
     var image: String,
     var eventName: String,
     var eventDate: String,
+    var link :String,
 )

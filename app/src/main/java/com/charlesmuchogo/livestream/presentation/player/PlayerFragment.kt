@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import androidx.recyclerview.widget.RecyclerView
 import com.charlesmuchogo.livestream.R
 import com.charlesmuchogo.livestream.databinding.FragmentPlayerBinding
@@ -21,7 +24,7 @@ import com.google.android.exoplayer2.util.Util
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PlayerFragment : Fragment() {
+class PlayerFragment : Fragment(), LifecycleObserver {
     private lateinit var binding: FragmentPlayerBinding
     private lateinit var player: SimpleExoPlayer
 
@@ -52,6 +55,7 @@ class PlayerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        lifecycle.addObserver(this)
         initializePlayer()
     }
 
@@ -73,8 +77,34 @@ class PlayerFragment : Fragment() {
         binding.playerView.player = player
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    override fun onPause() {
+        super.onPause()
+        player.playWhenReady = false
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    override fun onResume() {
+        super.onResume()
+        player.playWhenReady = true
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    override fun onStop() {
+        super.onStop()
+        player.playWhenReady = false
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    override fun onStart() {
+        super.onStart()
+        player.playWhenReady = true
+    }
+
+
     override fun onDestroyView() {
         super.onDestroyView()
+        lifecycle.removeObserver(this)
         player.release()
     }
 }
